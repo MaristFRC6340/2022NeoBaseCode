@@ -15,20 +15,20 @@ public class Shooter extends SubsystemBase {
         HIGH
     }
 
-    private CANSparkMax m_motor1;
-    private CANSparkMax m_motor2;
+    private CANSparkMax m_shootMotor1;
+    private CANSparkMax m_shootMotor2;
     private SparkMaxPIDController m_pidController;
 
     public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, maxRPM;
 
     public Shooter() {
-        m_motor1 = new CANSparkMax(4, MotorType.kBrushless);
-        m_motor2 = new CANSparkMax(5, MotorType.kBrushless);
+        m_shootMotor1 = new CANSparkMax(4, MotorType.kBrushless);
+        m_shootMotor2 = new CANSparkMax(5, MotorType.kBrushless);
 
-        m_motor1.restoreFactoryDefaults();
-        m_motor2.restoreFactoryDefaults();
+        m_shootMotor1.restoreFactoryDefaults();
+        m_shootMotor2.restoreFactoryDefaults();
 
-        m_pidController = m_motor1.getPIDController();
+        m_pidController = m_shootMotor1.getPIDController();
 
         kP = 6e-5;
         kI = 0;
@@ -90,7 +90,7 @@ public class Shooter extends SubsystemBase {
                 m_pidController.setReference(0, CANSparkMax.ControlType.kVelocity);
                 break;
         }
-        m_motor2.follow(m_motor1, true);
+        m_shootMotor2.follow(m_shootMotor1, true);
     }
 
 }
