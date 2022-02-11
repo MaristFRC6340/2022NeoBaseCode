@@ -1,9 +1,13 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -18,19 +22,28 @@ public class Shooter extends SubsystemBase {
     private CANSparkMax m_shootMotor1;
     private CANSparkMax m_shootMotor2;
     private SparkMaxPIDController m_pidController;
+    private RelativeEncoder m_shootEncoder;
 
-    public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, maxRPM;
+    public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, maxRPM, motorPower;
+
+    NetworkTableEntry velocityEntry;
+    NetworkTableEntry targetEntry;
+    NetworkTableEntry powerEntry;
+    NetworkTableEntry errorEntry;
+    NetworkTableEntry adjustEntry;
+    NetworkTableEntry motorPowerEntry;
 
     public Shooter() {
-        m_shootMotor1 = new CANSparkMax(4, MotorType.kBrushless);
-        m_shootMotor2 = new CANSparkMax(5, MotorType.kBrushless);
+        m_shootMotor1 = new CANSparkMax(5, MotorType.kBrushless);
+        m_shootMotor2 = new CANSparkMax(6, MotorType.kBrushless);
 
         m_shootMotor1.restoreFactoryDefaults();
         m_shootMotor2.restoreFactoryDefaults();
 
         m_pidController = m_shootMotor1.getPIDController();
+        m_shootEncoder = m_shootMotor1.getEncoder();
 
-        kP = 6e-5;
+        kP = .0000004;
         kI = 0;
         kD = 0;
         kIz = 0;
@@ -53,6 +66,20 @@ public class Shooter extends SubsystemBase {
         SmartDashboard.putNumber("Feed Forward", kFF);
         SmartDashboard.putNumber("Max Output", kMaxOutput);
         SmartDashboard.putNumber("Min Output", kMinOutput);
+
+        // Connect to Network Table
+        NetworkTableInstance inst = NetworkTableInstance.getDefault();
+        // Create Table
+        NetworkTable table = inst.getTable("Shooter PID Table");
+
+        velocityEntry = table.getEntry("Velocity");
+        targetEntry = table.getEntry("Target Velocity");
+        powerEntry = table.getEntry("Power");
+        errorEntry = table.getEntry("Error");
+        adjustEntry = table.getEntry("Adjust");
+        motorPowerEntry = table.getEntry("Motor Power");
+
+        m_shootMotor2.follow(m_shootMotor1, true);
     }
 
     public void updateParameters() {
@@ -75,22 +102,86 @@ public class Shooter extends SubsystemBase {
         }
     }
 
-    public void setPower(Power level) {
-        switch(level) {
-            case HIGH:
-                m_pidController.setReference(.9*maxRPM, CANSparkMax.ControlType.kVelocity);
-                break;
-            case MEDIUM:
-                m_pidController.setReference(.75*maxRPM, CANSparkMax.ControlType.kVelocity);
-                break;
-            case LOW:
-                m_pidController.setReference(.5*maxRPM, CANSparkMax.ControlType.kVelocity);
-                break;
-            default:
-                m_pidController.setReference(0, CANSparkMax.ControlType.kVelocity);
-                break;
+    public void setPowerPID(double level) {
+        // For Testing, we are commenting this
+        if(level > .9) {
+            level = .9;
         }
-        m_shootMotor2.follow(m_shootMotor1, true);
+        if(level < .05) {
+            m_pidController.setReference(0, CANSparkMax.ControlType.kVoltage);
+        }
+        else {
+            m_pidController.setReference(level * maxRPM, CANSparkMax.ControlType.kVelocity);
+        }
+        
     }
 
+    
+
+    public void setPower(double power) {
+        // limiter
+        if (power > 0.9) {
+            power = 0.9;
+        }
+
+        m_shootMotor1.set(power);
+        m_shootMotor2.set(-power);
+        //System.out.println("Current velocity of shooter: " + m_shootEncoder.getVelocity());
+
+        // Netowork Table
+        velocityEntry.setDouble(m_shootEncoder.getVelocity());
+        powerEntry.setDouble(power);
+
+        //m_pidController.setReference(power*maxRPM, CANSparkMax.ControlType.kVelocity);
+        //m_shootMotor2.follow(m_shootMotor1, true);
+    }
+
+
+    public void setRPM(double rpm) {
+
+        if (rpm == 0) {
+            m_shootMotor1.set(0);
+            m_shootMotor2.set(0);
+        }
+        else {
+            // double power = rpm/maxRPM; // Depricated
+    
+            double error = rpm - m_shootEncoder.getVelocity();
+    
+            motorPower += kP * error; // Adjusted Global Variable
+                                      // Motor Power remembered beteen frames
+    
+            //power += adjust; // Depricated
+            
+            if (motorPower > 0.9) {
+                motorPower = 0.9;
+            }
+
+            if (motorPower < 0) {
+                motorPower = 0;
+            }
+    
+            m_shootMotor1.set(motorPower);
+            m_shootMotor2.set(-motorPower);
+            //System.out.println("Current velocity of shooter: " + m_shootEncoder.getVelocity());
+    
+            // Netowork Table - Print Values
+            velocityEntry.setDouble(m_shootEncoder.getVelocity());
+            motorPowerEntry.setDouble(motorPower);
+            errorEntry.setDouble(error);
+            targetEntry.setDouble(rpm);
+            adjustEntry.setDouble(kP * error);
+        }
+        
+
+    }
+
+    /**
+     * 
+     * @param power range between 0 and 0.9
+     * Sets the Baseline power for PID Algorithm
+     */
+    public void setMotorPower(double power) {
+        motorPower = power;
+    }
 }

@@ -5,17 +5,30 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Shooter.Power;
 
 public class ShooterCommand extends CommandBase {
   private final Shooter shooter;
   private final Power power;
+  private double currentPower = 0;
+  private int previousPov = -1; // previous value of the d-pad
+  
   /** Creates a new ShooterCommand. */
   public ShooterCommand(Shooter shooter, Power power) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.shooter = shooter;
     this.power = power;
+
+    addRequirements(shooter);
+  }
+
+  public ShooterCommand(Shooter shooter) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    this.shooter = shooter;
+
+    this.power = null;
 
     addRequirements(shooter);
   }
@@ -27,13 +40,52 @@ public class ShooterCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.setPower(power);
+    
+    // Get Joystick input
+    if (Robot.getJoyLogi().getRawButton(1)) { // Button A
+      currentPower = 0.5;
+      shooter.setMotorPower(currentPower); // Sets Baseline Power
+    }
+    if (Robot.getJoyLogi().getRawButton(2)) { // Button B - 14.5ft
+      currentPower = 0.75;
+      shooter.setMotorPower(currentPower); // Sets Baseline Power
+    }
+    if (Robot.getJoyLogi().getRawButton(3)) { // Button X
+      currentPower = 0.9;
+      shooter.setMotorPower(currentPower); // Sets Baseline Power
+    }
+    if(Robot.getJoyLogi().getRawButton(4)) { //Button Y - stop
+      currentPower = 0;
+      shooter.setMotorPower(currentPower); // Sets Baseline Power
+    }
+    //if down is pressed on d-pad and nothing was pressed the previous cycle
+    if(Robot.getJoyLogi().getPOV() == 180 && previousPov == -1)
+    {
+      currentPower -= 0.01; 
+      shooter.setMotorPower(currentPower); // Sets Baseline Power
+    }
+    //if up is pressed on d-pad and nothing was pressed on the previous cycle
+    if(Robot.getJoyLogi().getPOV() == 0 && previousPov == -1) {
+      currentPower += 0.01; 
+      shooter.setMotorPower(currentPower); // Sets Baseline Power
+    }
+    if(currentPower < 0) {
+      currentPower = 0;
+    }
+
+    previousPov = Robot.getJoyLogi().getPOV();
+
+    shooter.setPower(currentPower);
+    //shooter.setRPM(currentPower*5676); // RPM Based
+
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    shooter.setPower(Power.OFF);
+    shooter.setPower(0);
+    // shooter.setPowerPID(currentPower);
+
   }
 
   // Returns true when the command should end.

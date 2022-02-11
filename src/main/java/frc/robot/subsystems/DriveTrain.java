@@ -4,13 +4,16 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Robot;
 
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
 
 public class DriveTrain extends SubsystemBase {
   private CANSparkMax leftFront;
@@ -22,23 +25,34 @@ public class DriveTrain extends SubsystemBase {
   private RelativeEncoder m_rightEncoder;
   public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput;
 
+  private NetworkTable limTable; // Limelight table data
+  private NetworkTableEntry tx; // x value of target from limelight
+  private NetworkTableEntry ledMode; // Controls limelight led mode
+  private final double power = 0.05;
 
   /** Creates a new DriveTrain. */
   public DriveTrain() {
-    leftFront = new CANSparkMax(0, MotorType.kBrushless);
-    leftRear = new CANSparkMax(1,  MotorType.kBrushless);
-    rightFront = new CANSparkMax(2,  MotorType.kBrushless);
-    rightRear = new CANSparkMax(3,  MotorType.kBrushless);
+    limTable = NetworkTableInstance.getDefault().getTable("limelight");
+    tx = limTable.getEntry("tx");
+    ledMode = limTable.getEntry("ledMode");
+
+    leftFront = new CANSparkMax(1, MotorType.kBrushless);
+    leftRear = new CANSparkMax(2, MotorType.kBrushless);
+    rightFront = new CANSparkMax(3, MotorType.kBrushless);
+    rightRear = new CANSparkMax(4, MotorType.kBrushless);
     /**
-     * The restoreFactoryDefaults method can be used to reset the configuration parameters
-     * in the SPARK MAX to their factory default state. If no argument is passed, these
+     * The restoreFactoryDefaults method can be used to reset the configuration
+     * parameters
+     * in the SPARK MAX to their factory default state. If no argument is passed,
+     * these
      * parameters will not persist between power cycles
      */
     leftFront.restoreFactoryDefaults();
     rightFront.restoreFactoryDefaults();
 
     /**
-     * In order to use PID functionality for a controller, a SparkMaxPIDController object
+     * In order to use PID functionality for a controller, a SparkMaxPIDController
+     * object
      * is constructed by calling the getPIDController() method on an existing
      * CANSparkMax object
      */
@@ -49,12 +63,12 @@ public class DriveTrain extends SubsystemBase {
     m_rightEncoder = rightFront.getEncoder();
 
     // PID coefficients
-    kP = 0.1; 
+    kP = 0.1;
     kI = 1e-4;
-    kD = 1; 
-    kIz = 0; 
-    kFF = 0; 
-    kMaxOutput = 1; 
+    kD = 1;
+    kIz = 0;
+    kFF = 0;
+    kMaxOutput = 1;
     kMinOutput = -1;
 
     // set PID coefficients
@@ -84,6 +98,28 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void drive(double left, double right) {
+    if(Robot.getJoyLogi().getRawAxis(2) > 0.5) {
+      ledMode.setDouble(3); // turn limelight on
+      double error = tx.getDouble(0);
+
+      left = error * -power;
+      right = error *  power;
+
+      if(left > 0.5) {
+          left = 0.5;
+      } else if(left < -0.5) {
+          left = -0.5;
+      }
+
+      if(right > 0.5) {
+          right = 0.5;
+      } else if(right < -0.5) {
+          right = -0.5;
+      }
+  } else {
+      ledMode.setDouble(1); // turn limelight off
+  }
+
     leftFront.set(left);
     leftRear.set(left);
     rightFront.set(right);
@@ -91,10 +127,10 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void driveDistance(double distance) {
-    
+
   }
-  
-  //getters for encoder drive command
+
+  // getters for encoder drive command
   public RelativeEncoder getLeftEnc() {
     return m_leftEncoder;
   }
@@ -103,5 +139,4 @@ public class DriveTrain extends SubsystemBase {
     return m_rightEncoder;
   }
 
-  
 }
