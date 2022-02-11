@@ -13,6 +13,11 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    public static double speedMultiplier = -.8;
-    public static double shooterSpeed = .5;
+    public static final double intakeSpeed = 0.5;
+    public static double speedMultiplier = .8;
+    public static double maxPivotSpeed = 1;
+    public static final double MAX_MOTOR_POWER = .35;
+    public static final double MOTOR_POWER_SCALAR = -1/180.0;
+    public static final double CENTER_TOLERANCE = 3;
+    public static final double FORWARD_POWER = -.25; //currently unused
 }

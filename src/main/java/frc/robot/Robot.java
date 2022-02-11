@@ -4,13 +4,12 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj.Joystick;
-
-
-
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -20,13 +19,26 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-  private Command m_EncoderDriveCommand;
+  private Command m_teleopCommand;
 
   private RobotContainer m_robotContainer;
-
-  private static Joystick leftJoystick = new Joystick(1);
-  private static Joystick rightJoystick = new Joystick(0);
+  
+  private static Joystick leftJoystick = new Joystick(0);
+  private static Joystick rightJoystick = new Joystick(1);
   private static Joystick joyLogi = new Joystick(2);
+  private static Joystick joyLogi2 = new Joystick(3);
+
+  // Smart Dashboard and Auto Chooser
+  private static final String kDefaultAuto = "Default";
+  private static final String kShootMoveBack = "ShootMoveBack";
+  private static final String kAimShootRapidLogo = "AimShootRapidLogo";
+  private static final String kFindBall = "FindBall";
+  private static final String kAimTester = "AimTester";
+  private static final String kLimelightAim = "LimelightAim";
+  
+  private String m_autoSelected;
+  private final SendableChooser<String> m_chooser = new SendableChooser<>();
+
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -36,6 +48,16 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+    // Initialize Chooser
+    
+    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
+    m_chooser.addOption("ShootMoveBack", kShootMoveBack);
+    m_chooser.addOption("AimShootRapidLogo", kAimShootRapidLogo);
+    m_chooser.addOption("FindBall", kFindBall);
+    m_chooser.addOption("AimTester", kAimTester);
+    m_chooser.addOption("Limelight Aim", kLimelightAim);
+    String [] choices = {kDefaultAuto, kShootMoveBack, kAimShootRapidLogo, kFindBall, kAimTester, kLimelightAim};
+    SmartDashboard.putStringArray("Auto List", choices);
   }
 
   /**
@@ -51,6 +73,7 @@ public class Robot extends TimedRobot {
     // commands, running already-scheduled commands, removing finished or interrupted commands,
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
+    
     CommandScheduler.getInstance().run();
   }
 
@@ -64,13 +87,44 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-    m_EncoderDriveCommand = m_robotContainer.getEncoderDriveCommand();
+    //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+
+    m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
+    System.out.println("Auto selected: " + m_autoSelected);
+
+    switch (m_autoSelected) {
+      case kShootMoveBack:
+        // Call Game Auto Function Here
+        System.out.println("Running ShootMoveBack");
+        m_autonomousCommand = m_robotContainer.getShootMoveBackCommand();
+        break;
+      case kAimShootRapidLogo:
+        // Call Game RedB Function Here
+        System.out.println("Running AimShootRapidLogo");
+        m_autonomousCommand = m_robotContainer.getAimShootRapidLogoCommand();
+        //redB();
+        break;
+      case kFindBall:
+        System.out.println("Running FindBall");
+        break;
+      case kAimTester:
+        System.out.println("Running AimTester");
+        // m_autonomousCommand = m_robotContainer.getAimTesterCommand();
+        m_autonomousCommand = m_robotContainer.getPickUpBallCommand();
+        break;
+      case kLimelightAim:
+        m_autonomousCommand = m_robotContainer.getLimelightAimCommand();
+      case kDefaultAuto:
+      default:
+        // Put default auto code here
+        // Nothing Happens Here
+        System.out.println("Running Default Code");
+        break;
+    }
 
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
-      m_EncoderDriveCommand.schedule();
     }
   }
 
@@ -86,6 +140,15 @@ public class Robot extends TimedRobot {
     // this line or comment it out.
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
+    }
+
+    m_teleopCommand = m_robotContainer.getTeleopCommand();
+    if (m_teleopCommand != null) {
+      m_robotContainer.getIndexerCommand().schedule();
+      m_robotContainer.getIntakeCommand().schedule();
+      m_teleopCommand.schedule();
+      m_robotContainer.getShooterCommand().schedule();
+      m_robotContainer.getLiftCommand().schedule();
     }
   }
 
@@ -117,5 +180,8 @@ public class Robot extends TimedRobot {
   {
     return joyLogi;
   }
-  
+
+  public static Joystick getJoyLogi2() {
+    return joyLogi2;
+  }
 }
