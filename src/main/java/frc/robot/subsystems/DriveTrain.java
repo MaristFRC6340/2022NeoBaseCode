@@ -93,6 +93,15 @@ public class DriveTrain extends SubsystemBase {
   public void driveDistance(double distance) {
     
   }
+  
+  //getters for encoder drive command
+  public RelativeEncoder getLeftEnc() {
+    return m_leftEncoder;
+  }
+
+  public RelativeEncoder getRightEnc() {
+    return m_rightEncoder;
+  }
 
   
 }

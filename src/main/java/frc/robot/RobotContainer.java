@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.EncoderDriveCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.TankDrive;
 import frc.robot.subsystems.DriveTrain;
@@ -30,6 +31,8 @@ public class RobotContainer {
   private final ShooterCommand m_shooterLowPower = new ShooterCommand(m_shooter, Shooter.Power.LOW);
   private final ShooterCommand m_shooterMediumPower = new ShooterCommand(m_shooter, Shooter.Power.MEDIUM);
   private final ShooterCommand m_shooterHighPower = new ShooterCommand(m_shooter, Shooter.Power.HIGH);
+
+  private final EncoderDriveCommand m_EncoderDriveCommand = new EncoderDriveCommand(m_driveTrain, 3, 0.5);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -64,5 +67,9 @@ public class RobotContainer {
 
   public Command getTeleopCommand() {
     return m_tankDriveCommand;
+  }
+
+  public Command getEncoderDriveCommand() {
+    return m_EncoderDriveCommand;
   }
 }
