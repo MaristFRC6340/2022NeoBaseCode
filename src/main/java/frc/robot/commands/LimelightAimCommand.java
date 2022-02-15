@@ -10,6 +10,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 
+//currently runs forever
 public class LimelightAimCommand extends CommandBase {
   /** Creates a new LimelightAimCommand. */
   private DriveTrain driveTrain;
