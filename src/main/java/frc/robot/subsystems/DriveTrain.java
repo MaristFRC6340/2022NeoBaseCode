@@ -120,8 +120,8 @@ public class DriveTrain extends SubsystemBase {
       ledMode.setDouble(1); // turn limelight off
   }
 
-    leftFront.set(left);
-    leftRear.set(left);
+    leftFront.set(-left);
+    leftRear.set(-left);
     rightFront.set(right);
     rightRear.set(right);
   }
