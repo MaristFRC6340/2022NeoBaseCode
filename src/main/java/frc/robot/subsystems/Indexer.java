@@ -9,7 +9,7 @@ public class Indexer extends SubsystemBase {
     private CANSparkMax indexMotor;
 
     public Indexer() {
-        indexMotor = new CANSparkMax(8, MotorType.kBrushless);
+        indexMotor = new CANSparkMax(8, MotorType.kBrushed);
     }
 
     @Override
