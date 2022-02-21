@@ -11,6 +11,9 @@ import frc.robot.Robot;
 
 public class TankDrive extends CommandBase {
   private final DriveTrain train;
+
+  private final double minMotorPower = 0.1;
+
   /** Creates a new TankDrive. */
   public TankDrive(DriveTrain subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -25,7 +28,18 @@ public class TankDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    train.drive(Constants.speedMultiplier * Robot.getLeftJoystick().getY(), Constants.speedMultiplier * Robot.getRightJoystick().getY());
+
+    double leftPower = Robot.getLeftJoystick().getY();
+    double rightPower = Robot.getRightJoystick().getY();
+
+    if(Math.abs(leftPower) < minMotorPower) {
+      leftPower = 0;
+    }
+    if(Math.abs(rightPower) < minMotorPower) {
+      rightPower = 0;
+    }
+
+    train.drive(Constants.speedMultiplier * leftPower, Constants.speedMultiplier * rightPower);
   }
 
   // Called once the command ends or is interrupted.
