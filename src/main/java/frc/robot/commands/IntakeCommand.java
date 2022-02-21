@@ -28,7 +28,11 @@ public class IntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intake.pickUp(-power*Robot.getJoyLogi().getRawAxis(1));
+    if(Robot.getJoyLogi().getRawAxis(3) > 0.5) {
+      intake.pickUp(0.7);
+    } else {
+      intake.pickUp(-power*Robot.getJoyLogi().getRawAxis(1));
+    }
   }
 
   // Called once the command ends or is interrupted.

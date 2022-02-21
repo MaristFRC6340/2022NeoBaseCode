@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -58,6 +59,10 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("Limelight Aim", kLimelightAim);
     String [] choices = {kDefaultAuto, kShootMoveBack, kAimShootRapidLogo, kFindBall, kAimTester, kLimelightAim};
     SmartDashboard.putStringArray("Auto List", choices);
+
+    // Uncomment below to clear Sticky Faults
+    //PowerDistribution pdp = new PowerDistribution();
+    //pdp.clearStickyFaults();
   }
 
   /**
