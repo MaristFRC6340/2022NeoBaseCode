@@ -43,7 +43,10 @@ public class EncoderTurnCommand extends  CommandBase{
         error = leftEncoder.getPosition() + rightEncoder.getPosition();
         // double turnAdjust = error * kP;
         double turnAdjust = 0;
-        drivetrain.drive(-(power - turnAdjust), -(-power - turnAdjust));
+        if(target > 0)
+            drivetrain.drive(-(power - turnAdjust), -(-power - turnAdjust));
+        else
+            drivetrain.drive(power - turnAdjust, -power - turnAdjust);
 
     }
 
