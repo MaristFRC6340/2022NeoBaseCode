@@ -127,6 +127,8 @@ public class Robot extends TimedRobot {
         break;
     }
 
+    m_autonomousCommand = m_robotContainer.getEncoderTestCommand();
+    
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();

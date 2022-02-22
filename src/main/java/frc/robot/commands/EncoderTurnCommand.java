@@ -35,15 +35,16 @@ public class EncoderTurnCommand extends  CommandBase{
         rightEncoder.setPosition(0);
         error = 0;
 
-        target = angleDegrees * 100; //constant to be tuned
+        target = angleDegrees * .1; //constant to be tuned
     }
 
     public void execute()
     {
         error = leftEncoder.getPosition() + rightEncoder.getPosition();
-        double turnAdjust = error * kP;
+        // double turnAdjust = error * kP;
+        double turnAdjust = 0;
+        drivetrain.drive(-(power - turnAdjust), -(-power - turnAdjust));
 
-        drivetrain.drive(power - turnAdjust, -power - turnAdjust);
     }
 
     public void end(boolean interrupted)
@@ -61,6 +62,8 @@ public class EncoderTurnCommand extends  CommandBase{
         if(target < 0 && currentAngle < target) {
           return true;
         }
+
+        System.out.println(currentAngle);
         return false;
       }
 }

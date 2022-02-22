@@ -44,16 +44,17 @@ public class EncoderDriveCommand extends CommandBase {
     rightEncoder.setPosition(0);
     error = 0;
 
-    target = distanceFeet * 100;
+    target = distanceFeet * 5.0 * 12.0 / 111.0;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     error = leftEncoder.getPosition() - rightEncoder.getPosition();
-    double turnAdjust = error *kP;
+    //double turnAdjust = error *kP;
+    double turnAdjust = 0;
 
-    drivetrain.drive(power-turnAdjust, power+turnAdjust);
+    drivetrain.drive(-(power-turnAdjust), -(power+turnAdjust));
   }
 
   // Called once the command ends or is interrupted.
@@ -74,6 +75,7 @@ public class EncoderDriveCommand extends CommandBase {
     if(target < 0 && currentDistance < target) {
       return true;
     }
+    System.out.println(currentDistance);
     return false;
   }
 }

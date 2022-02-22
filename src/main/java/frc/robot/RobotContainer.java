@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.AimShootRapidLogoCommand;
+import frc.robot.commands.EncoderTestCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IndexerCommand;
 import frc.robot.commands.IntakeCommand;
@@ -75,6 +76,7 @@ public class RobotContainer {
 
   private final PickUpBallCommand m_pPickUpBallCommand = new PickUpBallCommand(drivetrain, m_Indexer, m_Intake);
 
+  private final EncoderTestCommand m_EncoderTestCommand = new EncoderTestCommand(drivetrain);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
@@ -152,4 +154,7 @@ public class RobotContainer {
     return m_pPickUpBallCommand;
   }
 
+  public Command getEncoderTestCommand() {
+    return m_EncoderTestCommand;
+  }
 }
