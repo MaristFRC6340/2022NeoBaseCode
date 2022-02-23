@@ -18,8 +18,12 @@ public class EncoderTestCommand extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-       new EncoderDriveCommand(drivetrain, -12, 0.1)
-     // new EncoderTurnCommand(drivetrain, -90, 0.3)
+       new EncoderDriveCommand(drivetrain, 12, 0.1),
+       //new EncoderDriveCommand(drivetrain, -12, 0.1),
+       //new EncoderDriveCommand(drivetrain, -12, 0.1)
+       new EncoderTurnCommand(drivetrain, 90, 0.1),
+       new EncoderDriveCommand(drivetrain, -12, 0.1),
+       new EncoderTurnCommand(drivetrain, -90, 0.1)
     );
   }
 }

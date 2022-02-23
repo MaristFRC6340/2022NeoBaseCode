@@ -45,6 +45,8 @@ public class EncoderDriveCommand extends CommandBase {
     error = 0;
 
     target = distanceFeet * 5.0 * 12.0 / 111.0;
+
+    System.out.println("here");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -63,6 +65,8 @@ public class EncoderDriveCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     drivetrain.drive(0, 0);
+    leftEncoder.setPosition(0);
+    rightEncoder.setPosition(0);
   }
 
   // Returns true when the command should end.
