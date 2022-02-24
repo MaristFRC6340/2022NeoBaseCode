@@ -47,8 +47,9 @@ public class DriveTrain extends SubsystemBase {
      * these
      * parameters will not persist between power cycles
      */
-    leftFront.restoreFactoryDefaults();
-    rightFront.restoreFactoryDefaults();
+    //leftFront.restoreFactoryDefaults();   // These should be commented out because we setup
+    //rightFront.restoreFactoryDefaults();  // the encoders with the CAN system - Mr. Michaud
+                                            // Updated on 23 Feb 22
 
     /**
      * In order to use PID functionality for a controller, a SparkMaxPIDController
@@ -88,8 +89,9 @@ public class DriveTrain extends SubsystemBase {
     // SmartDashboard.putNumber("Max Output", kMaxOutput);
     // SmartDashboard.putNumber("Min Output", kMinOutput);
     // SmartDashboard.putNumber("Set Rotations", 0);
-    leftRear.follow(leftFront, false);
-    rightRear.follow(rightFront, false);
+    //leftRear.follow(leftFront, false);              // These are set to false - Mr. Michaud
+    //rightRear.follow(rightFront, false);            // We set motor powers Manually
+                                                      // Updated on 23 Feb 22
   }
 
   @Override
@@ -98,6 +100,8 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void drive(double left, double right) {
+    // In Auto Aiming Mode - overrides the input from the Driver
+    // Resets the left and right power
     if(Robot.getJoyLogi().getRawAxis(2) > 0.5) {
       ledMode.setDouble(3); // turn limelight on
       double error = tx.getDouble(0);
@@ -116,10 +120,12 @@ public class DriveTrain extends SubsystemBase {
       } else if(right < -0.5) {
           right = -0.5;
       }
-  } else {
+    } else { // Not in Auto Aiming Mode - uses parameters from driver as inputs
       ledMode.setDouble(1); // turn limelight off
-  }
+    }
 
+    // Run Motors with left and right power
+    // Either from Limelight or parameters
     leftFront.set(-left);
     leftRear.set(-left);
     rightFront.set(right);
