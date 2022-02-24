@@ -1,5 +1,7 @@
 package frc.robot.commands;
 
-public class Red2Command {
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+
+public class Red2Command extends SequentialCommandGroup {
     
 }
