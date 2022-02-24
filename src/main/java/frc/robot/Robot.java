@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -28,6 +29,12 @@ public class Robot extends TimedRobot {
   private static Joystick rightJoystick = new Joystick(1);
   private static Joystick joyLogi = new Joystick(2);
   private static Joystick joyLogi2 = new Joystick(3);
+
+  //Global State of Shooter
+  public static boolean isShooting = false;
+
+  //Touch Sensors
+  public static DigitalInput indexTouch = new DigitalInput(0); //Ball Indexer
 
   // Smart Dashboard and Auto Chooser
   private static final String kDefaultAuto = "Default";
