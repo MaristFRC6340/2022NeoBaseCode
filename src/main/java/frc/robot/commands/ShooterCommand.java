@@ -45,18 +45,22 @@ public class ShooterCommand extends CommandBase {
     if (Robot.getJoyLogi().getRawButton(1)) { // Button A
       currentPower = 0.5;
       shooter.setMotorPower(currentPower); // Sets Baseline Power
+      Robot.isShooting = true;
     }
     if (Robot.getJoyLogi().getRawButton(2)) { // Button B - 14.5ft
       currentPower = 0.75;
       shooter.setMotorPower(currentPower); // Sets Baseline Power
+      Robot.isShooting = true;
     }
     if (Robot.getJoyLogi().getRawButton(3)) { // Button X
       currentPower = 0.9;
       shooter.setMotorPower(currentPower); // Sets Baseline Power
+      Robot.isShooting = true;
     }
     if(Robot.getJoyLogi().getRawButton(4)) { //Button Y - stop
       currentPower = 0;
       shooter.setMotorPower(currentPower); // Sets Baseline Power
+      Robot.isShooting = false;
     }
     //if down is pressed on d-pad and nothing was pressed the previous cycle
     if(Robot.getJoyLogi().getPOV() == 180 && previousPov == -1)

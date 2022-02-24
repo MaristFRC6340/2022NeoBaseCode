@@ -27,10 +27,22 @@ public class IndexerCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(Robot.getJoyLogi().getRawAxis(3) > 0.5) {
+    if(Robot.getJoyLogi().getRawAxis(3) > 0.5) {//shoot when trigger is pressed
       indexer.push(-0.7);
-    } else {
-      indexer.push(power*Robot.getJoyLogi().getRawAxis(5));
+    } else {//if the trigger is not pressed, use the joysticks
+      /*
+        The 2022 robot should now stop the indexer when there is already one ball picked up
+        Evan Merritt (da boss)
+        2/24/22
+      */
+      if(Robot.isShooting || Robot.indexTouch.get() || Robot.getJoyLogi().getRawAxis(5) > 0)
+      {
+        indexer.push(power*Robot.getJoyLogi().getRawAxis(5));
+      }
+      else
+      {
+        indexer.push(0);
+      }
     }
   }
 
