@@ -43,7 +43,13 @@ public class Robot extends TimedRobot {
   private static final String kFindBall = "FindBall";
   private static final String kAimTester = "AimTester";
   private static final String kLimelightAim = "LimelightAim";
-  
+  private static final String kBlue1 = "Blue1";
+  private static final String kBlue2 = "Blue2";
+  private static final String kBlue3 = "Blue3";
+  private static final String kRed1 = "Red1";
+  private static final String kRed2 = "Red2";
+  private static final String kRed3 = "Red3";
+
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
@@ -64,6 +70,16 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("FindBall", kFindBall);
     m_chooser.addOption("AimTester", kAimTester);
     m_chooser.addOption("Limelight Aim", kLimelightAim);
+
+    //Auto Game Programs
+    m_chooser.addOption("Blue1", kBlue1);
+    m_chooser.addOption("Blue2", kBlue2);
+    m_chooser.addOption("Blue3", kBlue3);
+
+    m_chooser.addOption("Red1", kRed1);
+    m_chooser.addOption("Red2", kRed2);
+    m_chooser.addOption("Red3", kRed3);
+
     String [] choices = {kDefaultAuto, kShootMoveBack, kAimShootRapidLogo, kFindBall, kAimTester, kLimelightAim};
     SmartDashboard.putStringArray("Auto List", choices);
 
@@ -126,6 +142,25 @@ public class Robot extends TimedRobot {
         break;
       case kLimelightAim:
         m_autonomousCommand = m_robotContainer.getLimelightAimCommand();
+        break;
+      case kBlue1:
+        System.out.println("Running Blue 1 Autonomous");
+        break;
+      case kBlue2:
+        System.out.println("Running Blue 2 Autonomous");
+        break;
+      case kBlue3:
+        System.out.println("Running Blue 3 Autonomous");
+        break;
+        case kRed1:
+        System.out.println("Running Red 1 Autonomous");
+        break;
+      case kRed2:
+        System.out.println("Running Red 2 Autonomous");
+        break;
+      case kRed3:
+        System.out.println("Running Red 3 Autonomous");
+        break;
       case kDefaultAuto:
       default:
         // Put default auto code here
