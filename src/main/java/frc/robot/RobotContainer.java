@@ -7,6 +7,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.AimShootRapidLogoCommand;
+import frc.robot.commands.Blue1Command;
+import frc.robot.commands.Blue2Command;
+import frc.robot.commands.Blue3Command;
 import frc.robot.commands.EncoderTestCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IndexerCommand;
@@ -14,6 +17,9 @@ import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.LiftCommand;
 import frc.robot.commands.LimelightAimCommand;
 import frc.robot.commands.PickUpBallCommand;
+import frc.robot.commands.Red1Command;
+import frc.robot.commands.Red2Command;
+import frc.robot.commands.Red3Command;
 import frc.robot.commands.ShootMoveBackCommand;
 import frc.robot.commands.ShootTimeCommand;
 import frc.robot.commands.ShooterCommand;
@@ -77,6 +83,15 @@ public class RobotContainer {
   private final PickUpBallCommand m_pPickUpBallCommand = new PickUpBallCommand(drivetrain, m_Indexer, m_Intake);
 
   private final EncoderTestCommand m_EncoderTestCommand = new EncoderTestCommand(drivetrain);
+
+  private final Blue1Command m_Blue1Command = new Blue1Command();
+  private final Blue2Command m_Blue2Command = new Blue2Command();
+  private final Blue3Command m_Blue3Command = new Blue3Command();
+
+  private final Red1Command m_Red1Command = new Red1Command();
+  private final Red2Command m_Red2Command = new Red2Command();
+  private final Red3Command m_Red3Command = new Red3Command();
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
@@ -157,4 +172,29 @@ public class RobotContainer {
   public Command getEncoderTestCommand() {
     return m_EncoderTestCommand;
   }
+
+  public Command getBlue1Command() {
+    return m_Blue1Command;
+  }
+
+  public Command getBlue2Command() {
+    return m_Blue2Command;
+  }
+
+  public Command getBlue3Command() {
+    return m_Blue3Command;
+  }
+
+  public Command getRed1Command() {
+    return m_Red1Command;
+  }
+
+  public Command getRed2Command() {
+    return m_Red2Command;
+  }
+
+  public Command getRed3Command() {
+    return m_Red3Command;
+  }
+
 }
