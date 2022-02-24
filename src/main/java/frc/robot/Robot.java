@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import org.photonvision.PhotonCamera;
+
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PowerDistribution;
@@ -35,6 +37,9 @@ public class Robot extends TimedRobot {
 
   //Touch Sensors
   public static DigitalInput indexTouch = new DigitalInput(0); //Ball Indexer
+
+  //PhotonCamera
+  public static PhotonCamera camera = new PhotonCamera("Live!_Cam_Sync_HD_VF0070");
 
   // Smart Dashboard and Auto Chooser
   private static final String kDefaultAuto = "Default";
@@ -145,21 +150,33 @@ public class Robot extends TimedRobot {
         break;
       case kBlue1:
         System.out.println("Running Blue 1 Autonomous");
+        camera.setPipelineIndex(1);
+        m_autonomousCommand = m_robotContainer.getBlue1Command();
         break;
       case kBlue2:
         System.out.println("Running Blue 2 Autonomous");
+        camera.setPipelineIndex(1);
+        m_autonomousCommand = m_robotContainer.getBlue2Command();
         break;
       case kBlue3:
         System.out.println("Running Blue 3 Autonomous");
+        camera.setPipelineIndex(1);
+        m_autonomousCommand = m_robotContainer.getBlue3Command();
         break;
         case kRed1:
         System.out.println("Running Red 1 Autonomous");
+        camera.setPipelineIndex(2);
+        m_autonomousCommand = m_robotContainer.getRed1Command();
         break;
       case kRed2:
         System.out.println("Running Red 2 Autonomous");
+        camera.setPipelineIndex(2);
+        m_autonomousCommand = m_robotContainer.getRed2Command();
         break;
       case kRed3:
         System.out.println("Running Red 3 Autonomous");
+        camera.setPipelineIndex(2);
+        m_autonomousCommand = m_robotContainer.getRed3Command();
         break;
       case kDefaultAuto:
       default:
