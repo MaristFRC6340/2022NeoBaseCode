@@ -10,6 +10,7 @@ import frc.robot.commands.AimShootRapidLogoCommand;
 import frc.robot.commands.Blue1Command;
 import frc.robot.commands.Blue2Command;
 import frc.robot.commands.Blue3Command;
+import frc.robot.commands.Blue4Command;
 import frc.robot.commands.EncoderTestCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IndexerCommand;
@@ -20,6 +21,7 @@ import frc.robot.commands.PickUpBallCommand;
 import frc.robot.commands.Red1Command;
 import frc.robot.commands.Red2Command;
 import frc.robot.commands.Red3Command;
+import frc.robot.commands.Red4Command;
 import frc.robot.commands.ShootMoveBackCommand;
 import frc.robot.commands.ShootTimeCommand;
 import frc.robot.commands.ShooterCommand;
@@ -84,13 +86,15 @@ public class RobotContainer {
 
   private final EncoderTestCommand m_EncoderTestCommand = new EncoderTestCommand(drivetrain);
 
-  private final Blue1Command m_Blue1Command = new Blue1Command();
-  private final Blue2Command m_Blue2Command = new Blue2Command();
-  private final Blue3Command m_Blue3Command = new Blue3Command();
+  private final Blue1Command m_Blue1Command = new Blue1Command(drivetrain, m_Intake, m_Indexer, m_shooter);
+  private final Blue2Command m_Blue2Command = new Blue2Command(drivetrain, m_Intake, m_Indexer, m_shooter);
+  private final Blue3Command m_Blue3Command = new Blue3Command(drivetrain, m_Intake, m_Indexer, m_shooter);
+  private final Blue4Command m_Blue4Command = new Blue4Command(drivetrain, m_Intake, m_Indexer, m_shooter);
 
-  private final Red1Command m_Red1Command = new Red1Command();
-  private final Red2Command m_Red2Command = new Red2Command();
-  private final Red3Command m_Red3Command = new Red3Command();
+  private final Red1Command m_Red1Command = new Red1Command(drivetrain, m_Intake, m_Indexer, m_shooter);
+  private final Red2Command m_Red2Command = new Red2Command(drivetrain, m_Intake, m_Indexer, m_shooter);
+  private final Red3Command m_Red3Command = new Red3Command(drivetrain, m_Intake, m_Indexer, m_shooter);
+  private final Red4Command m_Red4Command = new Red4Command(drivetrain, m_Intake, m_Indexer, m_shooter);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -185,6 +189,10 @@ public class RobotContainer {
     return m_Blue3Command;
   }
 
+  public Command getBlue4Command() {
+    return m_Blue4Command;
+  }
+
   public Command getRed1Command() {
     return m_Red1Command;
   }
@@ -195,6 +203,10 @@ public class RobotContainer {
 
   public Command getRed3Command() {
     return m_Red3Command;
+  }
+
+  public Command getRed4Command() {
+    return m_Red4Command;
   }
 
 }

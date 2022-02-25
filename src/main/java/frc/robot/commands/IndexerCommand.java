@@ -43,6 +43,7 @@ public class IndexerCommand extends CommandBase {
       {
         indexer.push(0);
       }
+      System.out.println(Robot.indexTouch.get());
     }
   }
 

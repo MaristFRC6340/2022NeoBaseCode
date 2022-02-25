@@ -37,8 +37,8 @@ public class Shooter extends SubsystemBase {
         m_shootMotor1 = new CANSparkMax(5, MotorType.kBrushless);
         m_shootMotor2 = new CANSparkMax(6, MotorType.kBrushless);
 
-        m_shootMotor1.restoreFactoryDefaults();
-        m_shootMotor2.restoreFactoryDefaults();
+        //m_shootMotor1.restoreFactoryDefaults();
+        //m_shootMotor2.restoreFactoryDefaults();
 
         m_pidController = m_shootMotor1.getPIDController();
         m_shootEncoder = m_shootMotor1.getEncoder();
@@ -52,20 +52,20 @@ public class Shooter extends SubsystemBase {
         kMinOutput = -1;
         maxRPM = 5700;
 
-        m_pidController.setP(kP);
-        m_pidController.setI(kI);
-        m_pidController.setD(kD);
-        m_pidController.setIZone(kIz);
-        m_pidController.setFF(kFF);
-        m_pidController.setOutputRange(kMinOutput, kMaxOutput);
+        // m_pidController.setP(kP);
+        // m_pidController.setI(kI);
+        // m_pidController.setD(kD);
+        // m_pidController.setIZone(kIz);
+        // m_pidController.setFF(kFF);
+        // m_pidController.setOutputRange(kMinOutput, kMaxOutput);
 
-        SmartDashboard.putNumber("P Gain", kP);
-        SmartDashboard.putNumber("I Gain", kI);
-        SmartDashboard.putNumber("D Gain", kD);
-        SmartDashboard.putNumber("I Zone", kIz);
-        SmartDashboard.putNumber("Feed Forward", kFF);
-        SmartDashboard.putNumber("Max Output", kMaxOutput);
-        SmartDashboard.putNumber("Min Output", kMinOutput);
+        // SmartDashboard.putNumber("P Gain", kP);
+        // SmartDashboard.putNumber("I Gain", kI);
+        // SmartDashboard.putNumber("D Gain", kD);
+        // SmartDashboard.putNumber("I Zone", kIz);
+        // SmartDashboard.putNumber("Feed Forward", kFF);
+        // SmartDashboard.putNumber("Max Output", kMaxOutput);
+        // SmartDashboard.putNumber("Min Output", kMinOutput);
 
         // Connect to Network Table
         NetworkTableInstance inst = NetworkTableInstance.getDefault();

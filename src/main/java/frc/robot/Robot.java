@@ -51,9 +51,11 @@ public class Robot extends TimedRobot {
   private static final String kBlue1 = "Blue1";
   private static final String kBlue2 = "Blue2";
   private static final String kBlue3 = "Blue3";
+  private static final String kBLue4 = "Blue4";
   private static final String kRed1 = "Red1";
   private static final String kRed2 = "Red2";
   private static final String kRed3 = "Red3";
+  private static final String kRed4 = "Red4";
 
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
@@ -80,12 +82,14 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("Blue1", kBlue1);
     m_chooser.addOption("Blue2", kBlue2);
     m_chooser.addOption("Blue3", kBlue3);
+    m_chooser.addOption("Blue4", kBLue4);
 
     m_chooser.addOption("Red1", kRed1);
     m_chooser.addOption("Red2", kRed2);
     m_chooser.addOption("Red3", kRed3);
+    m_chooser.addOption("Red4", kRed4);
 
-    String [] choices = {kDefaultAuto, kShootMoveBack, kAimShootRapidLogo, kFindBall, kAimTester, kLimelightAim};
+    String [] choices = {kBlue1, kBlue2, kBlue3, kBLue4, kRed1, kRed2, kRed3, kRed4}; 
     SmartDashboard.putStringArray("Auto List", choices);
 
     // Uncomment below to clear Sticky Faults
@@ -163,7 +167,12 @@ public class Robot extends TimedRobot {
         camera.setPipelineIndex(1);
         m_autonomousCommand = m_robotContainer.getBlue3Command();
         break;
-        case kRed1:
+      case kBLue4:
+        System.out.println("Running Blue 4 Autonomous");
+        camera.setPipelineIndex(1);
+        m_autonomousCommand = m_robotContainer.getBlue4Command();
+        break;
+      case kRed1:
         System.out.println("Running Red 1 Autonomous");
         camera.setPipelineIndex(2);
         m_autonomousCommand = m_robotContainer.getRed1Command();
@@ -178,6 +187,12 @@ public class Robot extends TimedRobot {
         camera.setPipelineIndex(2);
         m_autonomousCommand = m_robotContainer.getRed3Command();
         break;
+      case kRed4:
+        System.out.println("Running Red 4 Autonomous");
+        camera.setPipelineIndex(2);
+        m_autonomousCommand = m_robotContainer.getRed4Command();
+        break;
+
       case kDefaultAuto:
       default:
         // Put default auto code here
@@ -186,7 +201,7 @@ public class Robot extends TimedRobot {
         break;
     }
 
-    m_autonomousCommand = m_robotContainer.getEncoderTestCommand();
+    //m_autonomousCommand = m_robotContainer.getEncoderTestCommand();
     
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {

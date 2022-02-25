@@ -28,7 +28,7 @@ public class DriveTrain extends SubsystemBase {
   private NetworkTable limTable; // Limelight table data
   private NetworkTableEntry tx; // x value of target from limelight
   private NetworkTableEntry ledMode; // Controls limelight led mode
-  private final double power = 0.05;
+  private final double power = 0.03;
 
   /** Creates a new DriveTrain. */
   public DriveTrain() {
@@ -73,12 +73,12 @@ public class DriveTrain extends SubsystemBase {
     kMinOutput = -1;
 
     // set PID coefficients
-    m_pidController.setP(kP);
-    m_pidController.setI(kI);
-    m_pidController.setD(kD);
-    m_pidController.setIZone(kIz);
-    m_pidController.setFF(kFF);
-    m_pidController.setOutputRange(kMinOutput, kMaxOutput);
+    // m_pidController.setP(kP);
+    // m_pidController.setI(kI);
+    // m_pidController.setD(kD);
+    // m_pidController.setIZone(kIz);
+    // m_pidController.setFF(kFF);
+    // m_pidController.setOutputRange(kMinOutput, kMaxOutput);
 
     // // display PID coefficients on SmartDashboard
     // SmartDashboard.putNumber("P Gain", kP);
@@ -92,7 +92,8 @@ public class DriveTrain extends SubsystemBase {
     //leftRear.follow(leftFront, false);              // These are set to false - Mr. Michaud
     //rightRear.follow(rightFront, false);            // We set motor powers Manually
                                                       // Updated on 23 Feb 22
-  }
+  //ledMode.setDouble(3);
+ }
 
   @Override
   public void periodic() {

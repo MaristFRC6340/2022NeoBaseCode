@@ -46,8 +46,8 @@ public class ShootTimeCommand extends CommandBase {
 
     if(currentTime - startTime > DELAY)
     {
-      indexer.push(PUSH_SPEED);
-      intake.pickUp(-PUSH_SPEED);
+      indexer.push(-PUSH_SPEED);
+      intake.pickUp(PUSH_SPEED);
     }
   }
 
