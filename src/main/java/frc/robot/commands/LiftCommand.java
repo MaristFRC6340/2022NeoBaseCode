@@ -64,6 +64,10 @@ public class LiftCommand extends CommandBase {
       liftSpeed = 0;
     }
 
+    if (Math.abs(pivotSpeed) < 0.1) { // Deadband for Arms: Mr. Michaud 25 Feb 22
+      pivotSpeed = 0;
+    }
+
     lift.pivot(pivotSpeed * Constants.maxPivotSpeed);
     lift.raise(liftSpeed); 
 

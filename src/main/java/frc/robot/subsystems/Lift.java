@@ -11,8 +11,8 @@ public class Lift extends SubsystemBase {
     private CANSparkMax lift;
     
     public Lift() {
-        leftArm = new CANSparkMax(9, MotorType.kBrushless);
-        rightArm = new CANSparkMax(10, MotorType.kBrushless);
+        leftArm = new CANSparkMax(9, MotorType.kBrushed);   // Must be Brushed Motors: Mr. Michaud 25 Feb 22
+        rightArm = new CANSparkMax(10, MotorType.kBrushed); // Must be Brushed Motors: 
         lift = new CANSparkMax(11, MotorType.kBrushless);
     }
 
