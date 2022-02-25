@@ -46,7 +46,7 @@ public class EncoderDriveCommand extends CommandBase {
 
     target = distanceFeet * 5.0 * 12.0 / 111.0;
 
-    System.out.println("here");
+    //System.out.println("here");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
