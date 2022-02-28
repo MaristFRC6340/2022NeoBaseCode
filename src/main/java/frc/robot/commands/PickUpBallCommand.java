@@ -8,7 +8,7 @@ import frc.robot.subsystems.Intake;
 public class PickUpBallCommand extends SequentialCommandGroup {
     public PickUpBallCommand(DriveTrain drivetrain, Indexer indexer, Intake intake) {
         addCommands(
-          new VisionDriveCommand(drivetrain, 0.5, 3),
+          new VisionDriveCommand2(drivetrain, 0.001, 3),
           new DriveTimeCommand(drivetrain, -0.3, 3)
         );
     }    

@@ -12,7 +12,10 @@ public class FindBallCommand extends SequentialCommandGroup {
   /** Creates a new FindBallCommand. */
   public FindBallCommand(DriveTrain drivetrain, Intake intake) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addCommands();
+    addCommands(
+      new VisionDriveCommand(drivetrain, 0.5, 3),
+      new DriveTimeCommand(drivetrain, -0.3, 3)
+    );
   }
 
 }

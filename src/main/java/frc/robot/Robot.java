@@ -89,7 +89,7 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("Red3", kRed3);
     m_chooser.addOption("Red4", kRed4);
 
-    String [] choices = {kBlue1, kBlue2, kBlue3, kBLue4, kRed1, kRed2, kRed3, kRed4}; 
+    String [] choices = {kFindBall, kBlue1, kBlue2, kBlue3, kBLue4, kRed1, kRed2, kRed3, kRed4}; 
     SmartDashboard.putStringArray("Auto List", choices);
 
     // Uncomment below to clear Sticky Faults
@@ -142,6 +142,7 @@ public class Robot extends TimedRobot {
         //redB();
         break;
       case kFindBall:
+        m_autonomousCommand = m_robotContainer.getPickUpBallCommand();
         //System.out.println("Running FindBall");
         break;
       case kAimTester:
