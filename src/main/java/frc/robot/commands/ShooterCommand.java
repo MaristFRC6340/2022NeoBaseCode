@@ -42,8 +42,9 @@ public class ShooterCommand extends CommandBase {
   public void execute() {
     
     // Get Joystick input
+    //Value changes made by Liam O'Toole on 2/26/2022
     if (Robot.getJoyLogi().getRawButton(1)) { // Button A
-      currentPower = 0.5;
+      currentPower = 0.38; //Low goal
       shooter.setMotorPower(currentPower); // Sets Baseline Power
       Robot.isShooting = true;
     }
@@ -53,7 +54,8 @@ public class ShooterCommand extends CommandBase {
       Robot.isShooting = true;
     }
     if (Robot.getJoyLogi().getRawButton(3)) { // Button X
-      currentPower = 0.9;
+      currentPower = 0.82;
+      // Power for high shots at de
       shooter.setMotorPower(currentPower); // Sets Baseline Power
       Robot.isShooting = true;
     }

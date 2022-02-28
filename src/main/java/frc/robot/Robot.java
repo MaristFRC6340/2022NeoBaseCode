@@ -127,25 +127,25 @@ public class Robot extends TimedRobot {
     //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
-    System.out.println("Auto selected: " + m_autoSelected);
+    //System.out.println("Auto selected: " + m_autoSelected);
 
     switch (m_autoSelected) {
       case kShootMoveBack:
         // Call Game Auto Function Here
-        System.out.println("Running ShootMoveBack");
+        //System.out.println("Running ShootMoveBack");
         m_autonomousCommand = m_robotContainer.getShootMoveBackCommand();
         break;
       case kAimShootRapidLogo:
         // Call Game RedB Function Here
-        System.out.println("Running AimShootRapidLogo");
+        //System.out.println("Running AimShootRapidLogo");
         m_autonomousCommand = m_robotContainer.getAimShootRapidLogoCommand();
         //redB();
         break;
       case kFindBall:
-        System.out.println("Running FindBall");
+        //System.out.println("Running FindBall");
         break;
       case kAimTester:
-        System.out.println("Running AimTester");
+        //System.out.println("Running AimTester");
         // m_autonomousCommand = m_robotContainer.getAimTesterCommand();
         m_autonomousCommand = m_robotContainer.getPickUpBallCommand();
         break;
@@ -153,42 +153,42 @@ public class Robot extends TimedRobot {
         m_autonomousCommand = m_robotContainer.getLimelightAimCommand();
         break;
       case kBlue1:
-        System.out.println("Running Blue 1 Autonomous");
+        //System.out.println("Running Blue 1 Autonomous");
         camera.setPipelineIndex(1);
         m_autonomousCommand = m_robotContainer.getBlue1Command();
         break;
       case kBlue2:
-        System.out.println("Running Blue 2 Autonomous");
+        //System.out.println("Running Blue 2 Autonomous");
         camera.setPipelineIndex(1);
         m_autonomousCommand = m_robotContainer.getBlue2Command();
         break;
       case kBlue3:
-        System.out.println("Running Blue 3 Autonomous");
+        //System.out.println("Running Blue 3 Autonomous");
         camera.setPipelineIndex(1);
         m_autonomousCommand = m_robotContainer.getBlue3Command();
         break;
       case kBLue4:
-        System.out.println("Running Blue 4 Autonomous");
+        //System.out.println("Running Blue 4 Autonomous");
         camera.setPipelineIndex(1);
         m_autonomousCommand = m_robotContainer.getBlue4Command();
         break;
       case kRed1:
-        System.out.println("Running Red 1 Autonomous");
+        //System.out.println("Running Red 1 Autonomous");
         camera.setPipelineIndex(2);
         m_autonomousCommand = m_robotContainer.getRed1Command();
         break;
       case kRed2:
-        System.out.println("Running Red 2 Autonomous");
+        //System.out.println("Running Red 2 Autonomous");
         camera.setPipelineIndex(2);
         m_autonomousCommand = m_robotContainer.getRed2Command();
         break;
       case kRed3:
-        System.out.println("Running Red 3 Autonomous");
+        //System.out.println("Running Red 3 Autonomous");
         camera.setPipelineIndex(2);
         m_autonomousCommand = m_robotContainer.getRed3Command();
         break;
       case kRed4:
-        System.out.println("Running Red 4 Autonomous");
+        //System.out.println("Running Red 4 Autonomous");
         camera.setPipelineIndex(2);
         m_autonomousCommand = m_robotContainer.getRed4Command();
         break;
@@ -197,7 +197,7 @@ public class Robot extends TimedRobot {
       default:
         // Put default auto code here
         // Nothing Happens Here
-        System.out.println("Running Default Code");
+        //System.out.println("Running Default Code");
         break;
     }
 
@@ -235,7 +235,9 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    //System.out.println(indexTouch.get());
+  }
 
   @Override
   public void testInit() {

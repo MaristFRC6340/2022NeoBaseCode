@@ -66,7 +66,7 @@ public class EncoderTurnCommand extends  CommandBase{
           return true;
         }
 
-        System.out.println(currentAngle);
+        //System.out.println(currentAngle);
         return false;
       }
 }

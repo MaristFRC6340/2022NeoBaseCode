@@ -105,13 +105,13 @@ public class VisionDriveCommand extends CommandBase {
       double calcPow = Constants.MOTOR_POWER_SCALAR*error;
       if(Math.abs(calcPow) < Constants.MAX_MOTOR_POWER)
       {
-        System.out.println("Less than max, error = " + error + " and the calculated power is " + calcPow);
+        //System.out.println("Less than max, error = " + error + " and the calculated power is " + calcPow);
         drivetrain.drive(calcPow, -calcPow);
       }
       else
       {
         double signOfCalcPow = calcPow / Math.abs(calcPow);
-        System.out.println("Greater than max, error = " + error + " and the calculated power is " + calcPow + " and the sign of calcPow is " + signOfCalcPow);
+        //System.out.println("Greater than max, error = " + error + " and the calculated power is " + calcPow + " and the sign of calcPow is " + signOfCalcPow);
         drivetrain.drive(Constants.MAX_MOTOR_POWER * signOfCalcPow, -Constants.MAX_MOTOR_POWER * signOfCalcPow);
       }
     }

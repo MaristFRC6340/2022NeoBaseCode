@@ -19,10 +19,10 @@ public class Blue4Command extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new ShootTimeCommand(shooter, intake, indexer, .4, 2.5),
+      new ShootTimeCommand(shooter, intake, indexer, .35, 2.5),
       new EncoderTurnCommand(driveTrain, -150, 0.2),
       new EncoderDriveIntakeCommand(driveTrain, intake, 90, 0.2),
-      new EncoderTurnCommand(driveTrain, 230, 0.2),
+      new EncoderTurnCommand(driveTrain, 200, 0.2),
       new ShootTimeCommand(shooter, intake, indexer, .5, 2.5)
     );
   }

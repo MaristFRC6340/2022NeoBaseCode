@@ -110,6 +110,9 @@ public class DriveTrain extends SubsystemBase {
       ledMode.setDouble(3); // turn limelight on
       double error = tx.getDouble(0); // get error from limelight network table
 
+      // Testing, increase error by 2 degrees
+      error += 5;
+
       // Calculate left and right power
       left = error * -power;
       right = error *  power;

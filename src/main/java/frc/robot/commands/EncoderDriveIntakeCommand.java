@@ -50,7 +50,7 @@ public class EncoderDriveIntakeCommand extends CommandBase {
 
     target = distanceFeet * 5.0 * 12.0 / 111.0;
 
-    System.out.println("here");
+    //System.out.println("here");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -87,7 +87,7 @@ public class EncoderDriveIntakeCommand extends CommandBase {
     if(target < 0 && currentDistance < target) {
       return true;
     }
-    System.out.println(currentDistance);
+    //System.out.println(currentDistance);
     return false;
   }
 }

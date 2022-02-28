@@ -81,7 +81,7 @@ public class EncoderDriveCommand extends CommandBase {
     if(target < 0 && currentDistance < target) {
       return true;
     }
-    System.out.println(currentDistance);
+    //System.out.println(currentDistance);
     return false;
   }
 }
