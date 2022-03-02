@@ -12,8 +12,8 @@ public class Blue2Command extends SequentialCommandGroup {
         // Add your commands in the addCommands() call, e.g.
         // addCommands(new FooCommand(), new BarCommand());
         addCommands(
-          new ShootTimeCommand(shooter, intake, indexer, 2.5, 0.4),
-          new EncoderDriveIntakeCommand(driveTrain, intake, -60, 0.2)
+          new ShootTimeCommand(shooter, intake, indexer, 0.4, 2.5),
+          new EncoderDriveCommand(driveTrain, -60, 0.2)
         );
       }
 }

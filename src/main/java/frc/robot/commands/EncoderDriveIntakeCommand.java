@@ -71,6 +71,7 @@ public class EncoderDriveIntakeCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     drivetrain.drive(0, 0);
+    intake.pickUp(0);
     leftEncoder.setPosition(0);
     rightEncoder.setPosition(0);
   }

@@ -8,23 +8,30 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 
 public class VisionDriveCommand2 extends CommandBase {
   private NetworkTable table;
   private NetworkTableEntry targetX;
+  private NetworkTableEntry targetYaw;
 
   private DriveTrain drivetrain;
 
   private long duration;
   private long startTime;
   private double power;
+  private double offset;
+
+  private final double minPower = .03;
 
   /** Creates a new VisionDriveCommand2. */
-  public VisionDriveCommand2(DriveTrain dTrain, double pwr, double dur) {
+  public VisionDriveCommand2(DriveTrain dTrain, double pwr, double dur, double offset) {
     // Use addRequirements() here to declare subsystem dependencies.
     table = NetworkTableInstance.getDefault().getTable("photonvision").getSubTable("Live!_Cam_Sync_HD_VF0770");
     targetX = table.getEntry("targetPixelsX");
+    targetYaw = table.getEntry("targetYaw");
+    this.offset = offset;
 
     drivetrain = dTrain;
     power = pwr;
@@ -40,9 +47,9 @@ public class VisionDriveCommand2 extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double error = targetX.getDouble(0)-160;
+    double error = targetYaw.getDouble(0);
 
-    error -= 4;
+    error += offset;
 
     double left, right;
     left = error * -power;

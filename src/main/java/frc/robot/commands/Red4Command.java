@@ -19,11 +19,13 @@ public class Red4Command extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new ShootTimeCommand(shooter, intake, indexer, 2.5, 0.4),
+      new ShootTimeCommand(shooter, intake, indexer, 0.4, 2.5),
       new EncoderTurnCommand(driveTrain, -150, 0.2),
-      new EncoderDriveIntakeCommand(driveTrain, intake, 60, 0.2),
-      new EncoderTurnCommand(driveTrain, 153, 0.2),
-      new ShootTimeCommand(shooter, intake, indexer, 0.7, 2.5)
+      new VisionDriveCommand2(driveTrain, 0.005, 1.5, 7),
+      new EncoderDriveIntakeCommand(driveTrain, intake, 90, 0.2),
+      new EncoderTurnCommand(driveTrain, 210, 0.2),
+      new LimelightTimeAimCommand(driveTrain, 0.02, 2),
+      new ShootTimeCommand(shooter, intake, indexer, 0.5, 2.5)
     );
   }
 }

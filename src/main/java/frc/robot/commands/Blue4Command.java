@@ -21,8 +21,10 @@ public class Blue4Command extends SequentialCommandGroup {
     addCommands(
       new ShootTimeCommand(shooter, intake, indexer, .35, 2.5),
       new EncoderTurnCommand(driveTrain, -150, 0.2),
+      //new VisionDriveCommand2(driveTrain, 0.005, 1.5),
       new EncoderDriveIntakeCommand(driveTrain, intake, 90, 0.2),
       new EncoderTurnCommand(driveTrain, 200, 0.2),
+      new LimelightTimeAimCommand(driveTrain, 0.02, 2),
       new ShootTimeCommand(shooter, intake, indexer, .5, 2.5)
     );
   }

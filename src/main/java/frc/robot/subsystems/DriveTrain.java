@@ -28,16 +28,8 @@ public class DriveTrain extends SubsystemBase {
   private RelativeEncoder m_rightEncoder;
   public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput;
 
-  private NetworkTable limTable; // Limelight table data
-  private NetworkTableEntry tx; // x value of target from limelight
-  private NetworkTableEntry ledMode; // Controls limelight led mode
-  private final double power = 0.02; // Power constant for limelight aim
-
   /** Creates a new DriveTrain. */
   public DriveTrain() {
-    limTable = NetworkTableInstance.getDefault().getTable("limelight");
-    tx = limTable.getEntry("tx");
-    ledMode = limTable.getEntry("ledMode");
 
     leftFront = new CANSparkMax(1, MotorType.kBrushless);
     leftRear = new CANSparkMax(2, MotorType.kBrushless);
@@ -104,35 +96,6 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void drive(double left, double right) {
-    // In Auto Aiming Mode - overrides the input from the Driver
-    // Resets the left and right power
-    if(Robot.getJoyLogi().getRawAxis(2) > 0.5) { // If left trigger pressed on shooting controller
-      ledMode.setDouble(3); // turn limelight on
-      double error = tx.getDouble(0); // get error from limelight network table
-
-      // Testing, increase error by 2 degrees
-      error += 5;
-
-      // Calculate left and right power
-      left = error * -power;
-      right = error *  power;
-
-      //Set bounds on left power
-      if(left > 0.3) {
-          left = 0.3;
-      } else if(left < -0.3) {
-          left = -0.3;
-      }
-
-      //Set bounds on right power
-      if(right > 0.3) {
-          right = 0.3;
-      } else if(right < -0.3) {
-          right = -0.3;
-      }
-    } else { // Not in Auto Aiming Mode - uses parameters from driver as inputs
-      ledMode.setDouble(1); // turn limelight off
-    }
 
     // Run Motors with left and right power
     // Either from Limelight or parameters

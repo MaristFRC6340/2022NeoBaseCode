@@ -13,10 +13,12 @@ public class Blue3Command extends SequentialCommandGroup {
         // Add your commands in the addCommands() call, e.g.
         // addCommands(new FooCommand(), new BarCommand());
         addCommands(
-          new ShootTimeCommand(shooter, intake, indexer, .04, 2.5),
+          new ShootTimeCommand(shooter, intake, indexer, .35, 2.5),
           new EncoderTurnCommand(driveTrain, 180, 0.2),
+          //new VisionDriveCommand2(driveTrain, 0.005, 1.5),
           new EncoderDriveIntakeCommand(driveTrain, intake, 60, 0.2),
           new EncoderTurnCommand(driveTrain, 180, 0.2),
+          new LimelightTimeAimCommand(driveTrain, 0.02, 2),
           new ShootTimeCommand(shooter, intake, indexer, 0.7, 2.5)
         );
       }

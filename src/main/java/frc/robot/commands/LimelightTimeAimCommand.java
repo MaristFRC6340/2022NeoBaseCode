@@ -50,26 +50,28 @@ public class LimelightTimeAimCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    ledMode.setDouble(3); // turn on limelight lights
     double error = tx.getDouble(0);
 
     //Based on changes made at DE - may need to be turned
-    error += 5;
+    error += 0;
+
     double left, right;
     left = error * -power;
     right = error *  power;
 
       //Set bounds on left power
-      if(left > 0.3) {
-          left = 0.3;
-      } else if(left < -0.3) {
-          left = -0.3;
+      if(left > 0.2) {
+          left = 0.2;
+      } else if(left < -0.2) {
+          left = -0.2;
       }
 
       //Set bounds on right power
-      if(right > 0.3) {
-          right = 0.3;
-      } else if(right < -0.3) {
-          right = -0.3;
+      if(right > 0.2) {
+          right = 0.2;
+      } else if(right < -0.2) {
+          right = -0.2;
       }
 
     driveTrain.drive(left, right);
@@ -79,7 +81,7 @@ public class LimelightTimeAimCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     driveTrain.drive(0, 0);
-    ledMode.setDouble(1); // turn off limelight lights
+    //ledMode.setDouble(1); // turn off limelight lights
   }
 
   // Returns true when the command should end.
