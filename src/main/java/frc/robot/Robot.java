@@ -50,6 +50,7 @@ public class Robot extends TimedRobot {
   private static final String kLimelightAim = "LimelightAim";
   private static final String kBlue1 = "Blue1";
   private static final String kBlue2 = "Blue2";
+  private static final String kBlue2High = "Blue2High";
   private static final String kBlue3 = "Blue3";
   private static final String kBLue4 = "Blue4";
   private static final String kRed1 = "Red1";
@@ -81,6 +82,7 @@ public class Robot extends TimedRobot {
     //Auto Game Programs
     m_chooser.addOption("Blue1", kBlue1);
     m_chooser.addOption("Blue2", kBlue2);
+    m_chooser.addOption("Blue2High", kBlue2High);
     m_chooser.addOption("Blue3", kBlue3);
     m_chooser.addOption("Blue4", kBLue4);
 
@@ -162,6 +164,11 @@ public class Robot extends TimedRobot {
         //System.out.println("Running Blue 2 Autonomous");
         camera.setPipelineIndex(1);
         m_autonomousCommand = m_robotContainer.getBlue2Command();
+        break;
+      case kBlue2High:
+        //System.out.println("Running Blue 2 Autonomous");
+        camera.setPipelineIndex(1);
+        m_autonomousCommand = m_robotContainer.getBlue2HighCommand();
         break;
       case kBlue3:
         //System.out.println("Running Blue 3 Autonomous");

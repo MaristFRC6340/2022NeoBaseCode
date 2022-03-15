@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.AimShootRapidLogoCommand;
 import frc.robot.commands.Blue1Command;
 import frc.robot.commands.Blue2Command;
+import frc.robot.commands.Blue2HighCommand;
 import frc.robot.commands.Blue3Command;
 import frc.robot.commands.Blue4Command;
 import frc.robot.commands.EncoderTestCommand;
@@ -88,6 +89,7 @@ public class RobotContainer {
 
   private final Blue1Command m_Blue1Command = new Blue1Command(drivetrain, m_Intake, m_Indexer, m_shooter);
   private final Blue2Command m_Blue2Command = new Blue2Command(drivetrain, m_Intake, m_Indexer, m_shooter);
+  private final Blue2HighCommand m_Blue2HighCommand = new Blue2HighCommand(drivetrain, m_Intake, m_Indexer, m_shooter);
   private final Blue3Command m_Blue3Command = new Blue3Command(drivetrain, m_Intake, m_Indexer, m_shooter);
   private final Blue4Command m_Blue4Command = new Blue4Command(drivetrain, m_Intake, m_Indexer, m_shooter);
 
@@ -208,5 +210,9 @@ public class RobotContainer {
   public Command getRed4Command() {
     return m_Red4Command;
   }
+
+public Command getBlue2HighCommand() {
+    return m_Blue2HighCommand;
+}
 
 }
