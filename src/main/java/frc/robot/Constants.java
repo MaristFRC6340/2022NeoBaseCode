@@ -21,4 +21,5 @@ public final class Constants {
     public static final double CENTER_TOLERANCE = 3;
     public static final double FORWARD_POWER = -.25; //currently unused
     public static final double VISION_OFFSET = 7; //currently unused, using parameters for different autonomi
+    public static final double TURN_POWER = 0.35;
 }

@@ -89,7 +89,7 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("Red3", kRed3);
     m_chooser.addOption("Red4", kRed4);
 
-    String [] choices = {kFindBall, kBlue1, kBlue2, kBlue3, kBLue4, kRed1, kRed2, kRed3, kRed4}; 
+    String [] choices = {kBlue2, kRed2}; 
     SmartDashboard.putStringArray("Auto List", choices);
 
     // Uncomment below to clear Sticky Faults
