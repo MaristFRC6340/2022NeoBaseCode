@@ -54,7 +54,7 @@ public class ShooterCommand extends CommandBase {
       Robot.isShooting = true;
     }
     if (Robot.getJoyLogi().getRawButton(3)) { // Button X
-      currentPower = 0.82;
+      currentPower = 0.64;
       // Power for high shots at de
       shooter.setMotorPower(currentPower); // Sets Baseline Power
       Robot.isShooting = true;

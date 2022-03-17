@@ -55,6 +55,7 @@ public class Robot extends TimedRobot {
   private static final String kBLue4 = "Blue4";
   private static final String kRed1 = "Red1";
   private static final String kRed2 = "Red2";
+  private static final String kRed2High = "Red2High";
   private static final String kRed3 = "Red3";
   private static final String kRed4 = "Red4";
 
@@ -88,10 +89,11 @@ public class Robot extends TimedRobot {
 
     m_chooser.addOption("Red1", kRed1);
     m_chooser.addOption("Red2", kRed2);
+    m_chooser.addOption("Red2High", kRed2High);
     m_chooser.addOption("Red3", kRed3);
     m_chooser.addOption("Red4", kRed4);
 
-    String [] choices = {kBlue2, kRed2}; 
+    String [] choices = {kBlue2, kBlue2High, kRed2, kRed2High}; 
     SmartDashboard.putStringArray("Auto List", choices);
 
     // Uncomment below to clear Sticky Faults
@@ -189,6 +191,11 @@ public class Robot extends TimedRobot {
         //System.out.println("Running Red 2 Autonomous");
         camera.setPipelineIndex(2);
         m_autonomousCommand = m_robotContainer.getRed2Command();
+        break;
+      case kRed2High:
+        //System.out.println("Running Red 2 Autonomous");
+        camera.setPipelineIndex(2);
+        m_autonomousCommand = m_robotContainer.getRed2HighCommand();
         break;
       case kRed3:
         //System.out.println("Running Red 3 Autonomous");

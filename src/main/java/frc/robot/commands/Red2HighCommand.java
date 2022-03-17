@@ -13,16 +13,9 @@ import frc.robot.subsystems.Shooter;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-/**
- * Blue 2 that can shoot high goal
- * Back up, shoot, back up
- * Noah Madelil 3/15/22
- */
-public class Blue2HighCommand extends SequentialCommandGroup {
-
-
-  /** Creates a new Blue2HighCommand. */
-  public Blue2HighCommand(DriveTrain driveTrain, Intake intake, Indexer indexer, Shooter shooter) {
+public class Red2HighCommand extends SequentialCommandGroup {
+  /** Creates a new Red2HighCommand. */
+  public Red2HighCommand(DriveTrain driveTrain, Intake intake, Indexer indexer, Shooter shooter) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(

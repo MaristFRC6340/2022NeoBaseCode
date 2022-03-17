@@ -21,6 +21,7 @@ import frc.robot.commands.LimelightAimCommand;
 import frc.robot.commands.PickUpBallCommand;
 import frc.robot.commands.Red1Command;
 import frc.robot.commands.Red2Command;
+import frc.robot.commands.Red2HighCommand;
 import frc.robot.commands.Red3Command;
 import frc.robot.commands.Red4Command;
 import frc.robot.commands.ShootMoveBackCommand;
@@ -95,6 +96,7 @@ public class RobotContainer {
 
   private final Red1Command m_Red1Command = new Red1Command(drivetrain, m_Intake, m_Indexer, m_shooter);
   private final Red2Command m_Red2Command = new Red2Command(drivetrain, m_Intake, m_Indexer, m_shooter);
+  private final Red2HighCommand m_Red2HighCommand = new Red2HighCommand(drivetrain, m_Intake, m_Indexer, m_shooter);
   private final Red3Command m_Red3Command = new Red3Command(drivetrain, m_Intake, m_Indexer, m_shooter);
   private final Red4Command m_Red4Command = new Red4Command(drivetrain, m_Intake, m_Indexer, m_shooter);
 
@@ -201,6 +203,10 @@ public class RobotContainer {
 
   public Command getRed2Command() {
     return m_Red2Command;
+  }
+
+  public Command getRed2HighCommand() {
+    return m_Red2HighCommand;
   }
 
   public Command getRed3Command() {
