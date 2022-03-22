@@ -28,6 +28,7 @@ import frc.robot.commands.ShootMoveBackCommand;
 import frc.robot.commands.ShootTimeCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.TankDrive;
+import frc.robot.commands.TwoBallShootCommand;
 import frc.robot.commands.VisionDriveCommand;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -99,6 +100,8 @@ public class RobotContainer {
   private final Red2HighCommand m_Red2HighCommand = new Red2HighCommand(drivetrain, m_Intake, m_Indexer, m_shooter);
   private final Red3Command m_Red3Command = new Red3Command(drivetrain, m_Intake, m_Indexer, m_shooter);
   private final Red4Command m_Red4Command = new Red4Command(drivetrain, m_Intake, m_Indexer, m_shooter);
+
+  private final TwoBallShootCommand m_TwoBallShootCommand = new TwoBallShootCommand(drivetrain, m_Intake, m_Indexer, m_shooter);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -219,6 +222,11 @@ public class RobotContainer {
 
 public Command getBlue2HighCommand() {
     return m_Blue2HighCommand;
+}
+
+public Command getTwoBallShootCommand()
+{
+  return m_TwoBallShootCommand;
 }
 
 }
