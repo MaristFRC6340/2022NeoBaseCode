@@ -20,9 +20,13 @@ public class TwoBallShootCommand extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new EncoderDriveIntakeCommand(driveTrain, intake, 60, 0.2),
-      new EncoderTurnCommand(driveTrain, 180, .35),
-      new ShootTimeCommand(shooter, intake, indexer, 0.75, 2.5)
+      new EncoderDriveIntakeCommand(driveTrain, intake, 65, 0.2),
+      new EncoderTurnCommand(driveTrain, 180, 0.2),
+      new LimelightTimeAimCommand(driveTrain, 0.02, 1),
+      new EncoderDriveCommand(driveTrain, 25, 0.2),
+      new LimelightTimeAimCommand(driveTrain, 0.02, 1),
+      new ShootTimeCommand(shooter, intake, indexer, 0.65, 2.5),
+      new EncoderDriveCommand(driveTrain, -10, 0.2)
     );
   }
 }

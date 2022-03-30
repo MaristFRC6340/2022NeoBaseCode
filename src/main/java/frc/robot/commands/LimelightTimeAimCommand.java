@@ -54,7 +54,7 @@ public class LimelightTimeAimCommand extends CommandBase {
     double error = tx.getDouble(0);
 
     //Based on changes made at DE - may need to be turned
-    error += 0;
+    error += -5;
 
     double left, right;
     left = error * -power;
@@ -81,7 +81,7 @@ public class LimelightTimeAimCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     driveTrain.drive(0, 0);
-    //ledMode.setDouble(1); // turn off limelight lights
+    ledMode.setDouble(1); // turn off limelight lights
   }
 
   // Returns true when the command should end.

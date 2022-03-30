@@ -52,7 +52,7 @@ public class TankDrive extends CommandBase {
       double error = tx.getDouble(0); // get error from limelight network table
 
       // Testing, increase error by 2 degrees
-      error += 5;
+      error -= 10;
 
       // Calculate left and right power
       leftPower = error * -power;

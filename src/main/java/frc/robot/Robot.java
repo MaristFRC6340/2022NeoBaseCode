@@ -52,7 +52,7 @@ public class Robot extends TimedRobot {
   private static final String kBlue2 = "Blue2";
   private static final String kBlue2High = "Blue2High";
   private static final String kBlue3 = "Blue3";
-  private static final String kBLue4 = "Blue4";
+  private static final String kBlue4 = "Blue4";
   private static final String kRed1 = "Red1";
   private static final String kRed2 = "Red2";
   private static final String kRed2High = "Red2High";
@@ -87,7 +87,7 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("Blue2", kBlue2);
     m_chooser.addOption("Blue2High", kBlue2High);
     m_chooser.addOption("Blue3", kBlue3);
-    m_chooser.addOption("Blue4", kBLue4);
+    m_chooser.addOption("Blue4", kBlue4);
     m_chooser.addOption("2BallBlue", k2BallBlue);
 
     m_chooser.addOption("Red1", kRed1);
@@ -97,7 +97,7 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("Red4", kRed4);
     m_chooser.addOption("2BallRed", k2BallRed);
 
-    String [] choices = {kBlue2, kBlue2High, k2BallBlue, kRed2, kRed2High, k2BallRed}; 
+    String [] choices = {kBlue2, kBlue2High, kRed2, kRed2High, k2BallRed, k2BallBlue}; 
     SmartDashboard.putStringArray("Auto List", choices);
 
     // Uncomment below to clear Sticky Faults
@@ -181,7 +181,7 @@ public class Robot extends TimedRobot {
         camera.setPipelineIndex(1);
         m_autonomousCommand = m_robotContainer.getBlue3Command();
         break;
-      case kBLue4:
+      case kBlue4:
         //System.out.println("Running Blue 4 Autonomous");
         camera.setPipelineIndex(1);
         m_autonomousCommand = m_robotContainer.getBlue4Command();
@@ -195,6 +195,7 @@ public class Robot extends TimedRobot {
         //System.out.println("Running Red 2 Autonomous");
         camera.setPipelineIndex(2);
         m_autonomousCommand = m_robotContainer.getRed2Command();
+        //System.out.println("Red2");
         break;
       case kRed2High:
         //System.out.println("Running Red 2 Autonomous");

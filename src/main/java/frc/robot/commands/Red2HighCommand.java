@@ -21,7 +21,7 @@ public class Red2HighCommand extends SequentialCommandGroup {
     addCommands(
       new EncoderDriveCommand(driveTrain, -35, 0.15),
       new ShootTimeCommand(shooter, intake, indexer, 0.6, 2.5),
-      new EncoderDriveCommand(driveTrain, -10, 0.2)
+      new EncoderDriveCommand(driveTrain, -20, 0.2)
     );
   }
 }

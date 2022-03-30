@@ -81,6 +81,7 @@ public class EncoderDriveIntakeCommand extends CommandBase {
   public boolean isFinished() {
 
     double currentDistance = leftEncoder.getPosition();
+    //System.out.println(currentDistance);
 
     if(target > 0 && currentDistance > target) {
       return true;
